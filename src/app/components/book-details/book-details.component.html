@@ -1,0 +1,26 @@
+<div class="container" *ngIf="book">
+  <div class="book-details">
+    <div class="imgCont">
+      <h2>{{ book.title }}</h2>
+      <img [src]="book.coverUrl" alt="Book Cover" class="cover" />
+    </div>
+    <div class="details">
+      <p><strong>First Publish Year:</strong> {{ book.first_publish_year }}</p>
+      <p>
+        <strong>Author(s):</strong>
+        <ng-container *ngIf="isArray(book.authors); else singleAuthor">
+          <span *ngFor="let author of book.authors; let isLast = last"
+            >{{ author.name }}<span *ngIf="!isLast">, </span></span
+          >
+        </ng-container>
+        <ng-template #singleAuthor>{{ book.authors }}</ng-template>
+      </p>
+      <p><strong>Edition Count:</strong> {{ book.edition_count }}</p>
+      <p><strong>Number of Pages:</strong> {{ book.subject.length }}</p>
+
+      <button (click)="toggleWishlist()">
+        {{ isInWishlist ? "Remove from Wishlist" : "Add to Wishlist" }}
+      </button>
+    </div>
+  </div>
+</div>

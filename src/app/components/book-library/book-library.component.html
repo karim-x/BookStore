@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Finance Books</h1>
+  <div class="grid">
+    <div class="grid-item" *ngFor="let book of books">
+      <img  (click)="goToBookDetails(book)" [src]="book.coverUrl" alt="Book Cover" class="cover" />
+      <div class="details">
+        <p><strong>Publish Date:</strong> {{ book.publishDate }}</p>
+        <p><strong>Title:</strong> {{ book.title }}</p>
+
+        <p>
+          <strong>Author(s):</strong>
+          <ng-container *ngIf="isArray(book.authors); else singleAuthor">
+            <span
+              class="xsxs"
+              *ngFor="let author of book.authors; let isLast = last"
+            >
+              <a (click)="goToAuthorDetails(author.key)">{{ author.name }}</a>
+              <span *ngIf="!isLast">, </span>
+            </span>
+          </ng-container>
+          <ng-template #singleAuthor>{{ book.authors }}</ng-template>
+        </p>
+      </div>
+      <div class="btnsCont">
+        <button class="xsxs" (click)="goToBookDetails(book)">More</button>
+        <button class="xsxs" (click)="toggleWishlist(book)">
+          {{
+            wishlistService.isBookInWishlist(book)
+              ? "Remove from Wishlist"
+              : "Add to Wishlist"
+          }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

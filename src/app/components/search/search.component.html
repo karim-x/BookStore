@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Search Books</h1>
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Enter your search query"
+    />
+    <select [(ngModel)]="searchField">
+      <option value="title">Title</option>
+      <option value="author">Author Name</option>
+      <option value="subject">Subject</option>
+    </select>
+    <button (click)="searchBooks()">Search</button>
+  </div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <div class="grid" *ngIf="books.length > 0">
+    <div class="grid-item" *ngFor="let book of books">
+      <img [src]="book.coverUrl" alt="Book Cover" class="cover" />
+      <div class="details">
+        <h3>{{ book.title }}</h3>
+        <p><strong>Author(s):</strong> {{ getAuthorNames(book) }}</p>
+        <p><strong>Publish Date:</strong> {{ book.publishDate }}</p>
+      </div>
+    </div>
+  </div>
+</div>

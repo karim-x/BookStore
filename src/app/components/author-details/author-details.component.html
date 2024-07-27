@@ -1,0 +1,14 @@
+<div class="container" *ngIf="author">
+  <div class="author-details">
+    <div class="imgCont">
+      <h2>{{ author.name }}</h2>
+      <img [src]="author.image" alt="Author Image" class="author-image cover" />
+    </div>
+    <div class="details">
+      <p><strong>Birthdate:</strong> {{ author.birthdate }}</p>
+      <p><strong>Top Work:</strong> {{ author.topWork }}</p>
+      <p><strong>Work Count:</strong> {{ author.workCount }}</p>
+      <p><strong>Top Subjects:</strong> {{ author.topSubjects.join(", ") }}</p>
+    </div>
+  </div>
+</div>
